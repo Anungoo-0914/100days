@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>100 Reasons I Love You</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8, #fff);
+    overflow-x: hidden;
+  }
+
+  /* PASSWORD SCREEN */
+  #lockScreen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  #lockScreen input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+    margin-top: 10px;
+  }
+
+  #lockScreen button {
+    margin-top: 15px;
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    background: #e75480;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* MAIN CONTENT */
+  #content {
+    display: none;
+    padding-bottom: 60px;
+  }
+
+  header {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  /* REASONS */
+  .reasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+  }
+
+  .reason-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    user-select: none;
+  }
+
+  .hidden-text {
+    display: none;
+    margin-top: 10px;
+  }
+
+  .revealed .hidden-text {
+    display: block;
+  }
+
+  .revealed .tap {
+    display: none;
+  }
+
+  .tap {
+    opacity: 0.6;
+    font-size: 0.9em;
+  }
+
+  /* NOTE */
+  .note {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    line-height: 1.7;
+  }
+
+  /* HEARTS */
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    100% {
+      transform: translateY(-110vh) translateX(40px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen">
+  <h1>💖 For My Love</h1>
+  <p>Enter the password</p>
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+<header>
+  <h1>100 Reasons I Love You 💕</h1>
+  <p>Click each card to reveal a reason</p>
+</header>
+
+<section>
+  <h2>💖 The Reasons</h2>
+
+  <div class="reasons">
+    <div class="reason-card" onclick="reveal(this)">
+      <div class="tap">Tap to reveal 💌</div>
+      <div class="hidden-text">1. The way you smile.</div>
+    </div>
+
+    <div class="reason-card" onclick="reveal(this)">
+      <div class="tap">Tap to reveal 💌</div>
+      <div class="hidden-text">2. You make me feel safe.</div>
+    </div>
+
+    <div class="reason-card" onclick="reveal(this)">
+      <div class="tap">Tap to reveal 💌</div>
+      <div class="hidden-text">3. You understand me.</div>
+    </div>
+
+    <!-- Copy until 100 -->
+  </div>
+</section>
+
+<section>
+  <h2>📝 100 Days Together</h2>
+  <div class="note">
+    <p>
+      Happy 100 days to us 💗  
+      Every day with you has been something I’m grateful for.
+      Thank you for loving me, choosing me, and staying with me.
+    </p>
+    <p>
+      This is only the beginning 🤍
+    </p>
+  </div>
+</section>
+
+</div>
+
+<script>
+  const correctPassword = "14"; // ← CHANGE THIS
+
+  function unlock() {
+    const input = document.getElementById("password").value;
+    if (input === correctPassword) {
+      document.getElementById("lockScreen").style.display = "none";
+      document.getElementById("content").style.display = "block";
+      startHearts();
+    } else {
+      alert("Wrong password 💔");
+    }
+  }
+
+  function reveal(card) {
+    card.classList.toggle("revealed");
+  }
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (16 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }, 500);
+  }
+</script>
+
+</body>
+</html>
